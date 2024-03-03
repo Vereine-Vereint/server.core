@@ -1,10 +1,11 @@
 #!/bin/bash
-
+PATH_CORE=$(dirname $0)
+PATH_ROOT=$PATH_CORE/..
+PATH_FILES=$PATH_ROOT/files
 set -e
-# cd ..
 
-mkdir -p files 
-cd files
+mkdir -p $PATH_FILES 
+cd $PATH_FILES
 
 if [ ! -f "jammy-live-server-amd64.iso" ]; then
   wget https://cdimage.ubuntu.com/ubuntu-server/jammy/daily-live/current/jammy-live-server-amd64.iso

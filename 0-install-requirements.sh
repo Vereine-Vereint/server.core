@@ -1,4 +1,8 @@
 #!/bin/bash
+PATH_CORE=$(dirname $0)
+PATH_ROOT=$PATH_CORE/..
+PATH_FILES=$PATH_ROOT/files
+set -e
 
 sudo apt update
 
