@@ -24,9 +24,11 @@ echo "Creating image for $HOSTNAME..."
 # create image
 cd $PATH_FILES/source-files
 
+rm -f ../$HOSTNAME.iso
+
 xorriso -as mkisofs -r \
   -V 'Ubuntu 22.04 LTS AUTO (EFIBIOS)' \
-  -o ../ubuntu-22.04-autoinstall-$HOSTNAME.iso \
+  -o ../$HOSTNAME.iso \
   --grub2-mbr ../BOOT/1-Boot-NoEmul.img \
   -partition_offset 16 \
   --mbr-force-bootable \
@@ -40,3 +42,5 @@ xorriso -as mkisofs -r \
   -e '--interval:appended_partition_2:::' \
   -no-emul-boot \
   .
+
+echo "[DONE] Image created."

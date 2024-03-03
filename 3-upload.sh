@@ -8,4 +8,14 @@ set -e
 source $PATH_CORE/F-check-env.sh
 check_env "$1" true
 
-echo "Uploading files to $HOSTNAME..."
+echo "Uploading $HOSTNAME.iso..."
+
+# upload to FTP server
+ftp -n <<EOF
+open $FTP_SERVER
+user $FTP_USER $FTP_PASSWORD
+put $PATH_FILES/$HOSTNAME.iso boot.iso
+bye
+EOF
+
+echo "[DONE] Upload completed."

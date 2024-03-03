@@ -23,3 +23,5 @@ touch source-files/server/meta-data
 # and replace it with the contents of ../core/template/grob.cfg.addon
 awk '/menuentry/{c++;if(c==1){system("cat ../core/template/grub.cfg.addon")}}1' source-files/boot/grub/grub.cfg > source-files/boot/grub/grub.cfg.tmp
 mv source-files/boot/grub/grub.cfg.tmp source-files/boot/grub/grub.cfg
+
+echo "[DONE] Download and extract completed."
