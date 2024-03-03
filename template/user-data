@@ -29,17 +29,14 @@ autoinstall:
       lock_passwd: true
       ssh_authorized_keys:
       - ANSIBLE_SSH_AUTHORIZED_KEY
-    - name: conny
+    - name: USER_NAME
       groups: users,admin
       sudo: ALL=(ALL) NOPASSWD:ALL
       shell: /bin/bash
       lock_passwd: false
-      plain_text_passwd: UTBACTy74xuy
+      plain_text_passwd: USER_PASSWORD
       ssh_authorized_keys:
       - USER_SSH_AUTHORIZED_KEY
-
-  # identity:
-  #   hostname: server
 
   apt:
     primary:

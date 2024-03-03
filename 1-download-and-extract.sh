@@ -11,9 +11,9 @@ if [ ! -f "jammy-live-server-amd64.iso" ]; then
   wget https://cdimage.ubuntu.com/ubuntu-server/jammy/daily-live/current/jammy-live-server-amd64.iso
 fi
 
-rm -rf 'source-files'
+rm -rf source-files BOOT
 7z -y x jammy-live-server-amd64.iso -osource-files
-rm -rf 'source-files/[BOOT]'
+mv 'source-files/[BOOT]' BOOT
 
 mkdir source-files/server
 

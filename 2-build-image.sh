@@ -6,18 +6,20 @@ set -e
 
 # check .env
 source $PATH_CORE/F-check-env.sh
-check_env $1 true
+check_env "$1" true
 
-echo "Creating image for $HOSTNAME..."
+echo "Creating user-data for $HOSTNAME..."
 
 # copy template user-data
-cp $PATH_CORE/template/user-data $PATH_FILES/source-files/server
+cp -f $PATH_CORE/template/user-data $PATH_FILES/source-files/server
 
 # change variables in user-data
 for var in $all_vars; do
   var=$(echo $var | sed 's/[\$\{\}]//g')
-  sed -i "s/\${$var}/${!var}/g" $PATH_FILES/source-files/server/user-data
+  sed -i "s/$var/${!var}/g" $PATH_FILES/source-files/server/user-data
 done
+
+echo "Creating image for $HOSTNAME..."
 
 # create image
 cd $PATH_FILES/source-files
