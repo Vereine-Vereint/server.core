@@ -1,0 +1,66 @@
+#cloud-config
+
+autoinstall:
+  version: 1
+  # interactive-sections:
+  #  - network
+  storage: # This should set the interactive (lvm set) default
+    layout:
+      name: lvm
+      match:
+        size: largest
+  locale: de_DE.UTF-8
+  timezone: Europe/Berlin
+  keyboard:
+    layout: de
+
+  user-data:
+    hostname: bugsbunny
+    swap:
+      filename: /swap.img
+      size: "auto" # or size in bytes
+      maxsize: 4G
+    users:
+    - name: ansible
+      gecos: Ansible User
+      groups: users,admin,wheel
+      sudo: ALL=(ALL) NOPASSWD:ALL
+      shell: /bin/bash
+      lock_passwd: true
+      ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCQ1YK3BoWJ0hxVFx3tMEqkJC/Ioh9HRfXdmv/BnY2+CVMqUWE07Db/qUfhnar62FleAkvVr55BbfW80aR5MR0tZUU0QFTpOhGdsHFbSOvqL8h6SnOygT8crFgLxGAb2l2fbMlNljyNqGiIFbALaaqSjmzbEE+qXFgazf4n3U1VkkWHuXug+OwDCDDFialurikzCA2VPQl6t4bV/2E37aMCZ9+0fn6hzLuVo99xKgfAxGyQO10/e4TdLwTi2+00yUMreQsV3y/+hJVf5BACwckdL+J32Y6c9Yx3BVXG/1lm0OWofiaY/4vkUdEqhEo0YMjr2Yjpg3ml/WD4YMcv/9KMSGwilCMRLs0p43/cbYtRCwKBDwjtOiwKheP/ifVGVZJus5Ye2HuTTgNBeswO4VJhvIBDsoqmrNKy7QnESRIoCT90hXUJyEo1ytjco/A1VZM2h6EGwzVDfw3y28EBh9xHbaRYLQdxaWh3Bm26YtOOPYElPzBKrrcuOTtf7/o9WHM= admin@CONNECTA
+    - name: conny
+      groups: users,admin
+      sudo: ALL=(ALL) NOPASSWD:ALL
+      shell: /bin/bash
+      lock_passwd: false
+      plain_text_passwd: UTBACTy74xuy
+      ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCQ1YK3BoWJ0hxVFx3tMEqkJC/Ioh9HRfXdmv/BnY2+CVMqUWE07Db/qUfhnar62FleAkvVr55BbfW80aR5MR0tZUU0QFTpOhGdsHFbSOvqL8h6SnOygT8crFgLxGAb2l2fbMlNljyNqGiIFbALaaqSjmzbEE+qXFgazf4n3U1VkkWHuXug+OwDCDDFialurikzCA2VPQl6t4bV/2E37aMCZ9+0fn6hzLuVo99xKgfAxGyQO10/e4TdLwTi2+00yUMreQsV3y/+hJVf5BACwckdL+J32Y6c9Yx3BVXG/1lm0OWofiaY/4vkUdEqhEo0YMjr2Yjpg3ml/WD4YMcv/9KMSGwilCMRLs0p43/cbYtRCwKBDwjtOiwKheP/ifVGVZJus5Ye2HuTTgNBeswO4VJhvIBDsoqmrNKy7QnESRIoCT90hXUJyEo1ytjco/A1VZM2h6EGwzVDfw3y28EBh9xHbaRYLQdxaWh3Bm26YtOOPYElPzBKrrcuOTtf7/o9WHM= admin@CONNECTA
+
+  # identity:
+  #   hostname: server
+
+  apt:
+    primary:
+    - arches: [default]
+      uri: http://de.archive.ubuntu.com/ubuntu/
+  updates: all
+  ssh:
+    install-server: true
+    allow-pw: false
+  network:
+    version: 2
+    ethernets:
+      # enp0s3: # VM
+      #   dhcp4: true
+      ens3: # 1blu SERVER
+        addresses:
+          - 178.254.39.236/22
+        routes:
+          - to: default
+            via: 178.254.36.1
+        nameservers:
+            addresses: [178.254.16.151, 178.254.16.141]
+
+  shutdown: reboot # reboot after installation
