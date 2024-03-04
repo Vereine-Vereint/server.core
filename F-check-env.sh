@@ -4,7 +4,7 @@ function check_env() {
 
   # assert $1 is hostname
   if [ -z "$1" ]; then
-    echo "Usage: ./create.sh <Hostname>"
+    echo "Usage: $0 <Hostname>"
     exit 1
   fi
 
