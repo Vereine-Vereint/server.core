@@ -16,7 +16,7 @@ cp -f $PATH_CORE/template/user-data $PATH_FILES/source-files/server
 # change variables in user-data
 for var in $all_vars; do
   var=$(echo $var | sed 's/[\$\{\}]//g')
-  sed -i "s/$var/${!var}/g" $PATH_FILES/source-files/server/user-data
+  sed -i "s#$var#${!var}#g" $PATH_FILES/source-files/server/user-data
 done
 
 echo "Creating image for $HOSTNAME..."
