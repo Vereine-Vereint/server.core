@@ -14,14 +14,12 @@ ORGANIZATION=$(echo $REPOSITORY | cut -d'.' -f2)
 
 echo "checking keyfiles for $ORGANIZATION:"
 
-
 # check admin key
 echo "  admin"
 if [ ! -f "keys/${ORGANIZATION}_admin_key" ]; then
   echo "  generate admin key..."
   ssh-keygen -t rsa -b 4096 -N "" -C "admin@${ORGANIZATION}" -f keys/${ORGANIZATION}_admin_key
 fi
-
 
 # check backup key
 echo "  backup"
@@ -40,3 +38,9 @@ for env_file in $(find . -maxdepth 1 -name "*.env"); do
     ssh-keygen -t rsa -b 4096 -N "" -C "server-${server_name}@${ORGANIZATION}" -f keys/${ORGANIZATION}_server_${server_name}_key
   fi
 done
+
+# fixing permissions
+echo "fixing permissions..."
+sudo chown -R $USER:$USER keys
+sudo chmod 700 keys
+sudo chmod 600 -R keys/*
