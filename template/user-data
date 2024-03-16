@@ -15,28 +15,25 @@ autoinstall:
     layout: de
 
   user-data:
-    hostname: HOSTNAME
+    hostname: ${HOSTNAME}
+    ssh_keys:
+      rsa_private: |
+        ${SSH_IDENTITY_PRIVATE_KEY}
+      rsa_public: |
+        ${SSH_IDENTITY_PUBLIC_KEY}
     swap:
       filename: /swap.img
       size: "auto" # or size in bytes
-      maxsize: SWAP_SIZE
+      maxsize: ${SWAP_SIZE}
     users:
-    - name: ansible
-      gecos: Ansible User
-      groups: users,admin,wheel
-      sudo: ALL=(ALL) NOPASSWD:ALL
-      shell: /bin/bash
-      lock_passwd: true
-      ssh_authorized_keys:
-      - ANSIBLE_SSH_AUTHORIZED_KEY
-    - name: USER_NAME
+    - name: ${USER_NAME}
       groups: users,admin
       sudo: ALL=(ALL) NOPASSWD:ALL
       shell: /bin/bash
       lock_passwd: false
-      plain_text_passwd: USER_PASSWORD
+      plain_text_passwd: ${USER_PASSWORD}
       ssh_authorized_keys:
-      - USER_SSH_AUTHORIZED_KEY
+      - ${SSH_ADMIN_PUBLIC_KEY}
 
   apt:
     primary:
@@ -53,11 +50,11 @@ autoinstall:
       #   dhcp4: true
       ens3: # 1blu SERVER
         addresses:
-          - IP_ADDRESS_WITH_CIDR
+        - ${IP_ADDRESS_WITH_CIDR}
         routes:
-          - to: default
-            via: GATEWAY
+        - to: default
+          via: ${GATEWAY}
         nameservers:
-            addresses: [NAMESERVERS]
+          addresses: [${NAMESERVERS}]
 
   shutdown: reboot # reboot after installation

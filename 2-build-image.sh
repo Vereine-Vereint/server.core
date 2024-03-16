@@ -10,14 +10,11 @@ check_env "$1" true
 
 echo "Creating user-data for $HOSTNAME..."
 
-# copy template user-data
-cp -f $PATH_CORE/template/user-data $PATH_FILES/source-files/server
+# update SSH_IDENTITY_PRIVATE_KEY: replace "\n" with "\n        "
+SSH_IDENTITY_PRIVATE_KEY=$(echo "$SSH_IDENTITY_PRIVATE_KEY" | sed ':a;N;$!ba;s/\n/\n        /g')
 
-# change variables in user-data
-for var in $all_vars; do
-  var=$(echo $var | sed 's/[\$\{\}]//g')
-  sed -i "s#$var#${!var}#g" $PATH_FILES/source-files/server/user-data
-done
+# copy user-data with changed variables
+envsubst < $PATH_CORE/template/user-data > $PATH_FILES/source-files/server/user-data
 
 echo "Creating image for $HOSTNAME..."
 

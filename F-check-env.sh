@@ -19,7 +19,12 @@ function check_env() {
   fi
 
   # load $PATH_ROOT/$1.env
-  source $PATH_ROOT/$1.env
+  local pwd_path=$(pwd)
+  cd $PATH_ROOT
+  set -o allexport
+  source $1.env
+  set +o allexport
+  cd $pwd_path
 
   # assert $1 == $HOSTNAME
   if [ "$1" != "$HOSTNAME" ]; then
