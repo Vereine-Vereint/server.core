@@ -8,6 +8,6 @@ echo "Installing requirements..."
 
 sudo apt update
 
-sudo apt install whois xorriso sed curl gpg isolinux p7zip-full mkisofs genisoimage
+sudo apt install -y whois xorriso sed curl gpg isolinux p7zip-full mkisofs genisoimage
 
 echo "[DONE] Requirements installed."

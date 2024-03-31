@@ -20,6 +20,8 @@ fi
 
 echo "checking keyfiles for $ORGANIZATION:"
 
+mkdir -p keys
+
 # check admin key
 echo "  admin"
 if [ ! -f "keys/${ORGANIZATION}_admin_key" ]; then
