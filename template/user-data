@@ -16,11 +16,6 @@ autoinstall:
 
   user-data:
     hostname: ${HOSTNAME}
-    ssh_keys:
-      rsa_private: |
-        ${SSH_IDENTITY_PRIVATE_KEY}
-      rsa_public: |
-        ${SSH_IDENTITY_PUBLIC_KEY}
     swap:
       filename: /swap.img
       size: "auto" # or size in bytes
