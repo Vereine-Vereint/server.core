@@ -8,9 +8,15 @@ set -e
 # use the root folder to find the organization name
 cd $PATH_ROOT
 FULL_PATH_ROOT=$(pwd)
-REPOSITORY=$(basename $FULL_PATH_ROOT)
-# split the organization name to get the server name
-ORGANIZATION=$(echo $REPOSITORY | cut -d'.' -f2)
+
+# check if arg1 is set
+if [ -z "$1" ]; then
+  echo "Detecting organization from folder name..."
+  REPOSITORY=$(basename $FULL_PATH_ROOT)
+  ORGANIZATION=$(echo $REPOSITORY | cut -d'.' -f2)
+else
+  ORGANIZATION=$1
+fi
 
 echo "checking keyfiles for $ORGANIZATION:"
 
