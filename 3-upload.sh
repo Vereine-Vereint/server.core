@@ -10,6 +10,15 @@ check_env "$1" true
 
 echo "Uploading $HOSTNAME.iso..."
 
+
+# delete old iso on FTP server
+ftp -n <<EOF
+open $FTP_SERVER
+user $FTP_USER $FTP_PASSWORD
+delete boot.iso
+bye
+EOF
+
 # upload to FTP server
 ftp -n <<EOF
 open $FTP_SERVER
