@@ -28,7 +28,7 @@ autoinstall:
       lock_passwd: false
       plain_text_passwd: ${USER_PASSWORD}
       ssh_authorized_keys:
-      - ${SSH_ADMIN_PUBLIC_KEY}
+      - ${USER_AUTHORIZED_KEY}
 
   apt:
     primary:
