@@ -30,11 +30,6 @@ autoinstall:
       ssh_authorized_keys:
       - ${USER_AUTHORIZED_KEY}
 
-  apt:
-    primary:
-    - arches: [default]
-      uri: http://de.archive.ubuntu.com/ubuntu/
-  updates: all
   ssh:
     install-server: true
     allow-pw: false
