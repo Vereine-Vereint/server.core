@@ -7,12 +7,12 @@ set -e
 mkdir -p $PATH_FILES 
 cd $PATH_FILES
 
-if [ ! -f "jammy-live-server-amd64.iso" ]; then
-  wget https://cdimage.ubuntu.com/ubuntu-server/jammy/daily-live/current/jammy-live-server-amd64.iso
+if [ ! -f "noble-live-server-amd64.iso" ]; then
+  wget https://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
 fi
 
 rm -rf source-files BOOT
-7z -y x jammy-live-server-amd64.iso -osource-files
+7z -y x noble-live-server-amd64.iso -osource-files
 mv 'source-files/[BOOT]' BOOT
 
 mkdir source-files/server
