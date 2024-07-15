@@ -24,7 +24,7 @@ cd $PATH_FILES/source-files
 rm -f ../$HOSTNAME.iso
 
 xorriso -as mkisofs -r \
-  -V 'Ubuntu 22.04 LTS AUTO (EFIBIOS)' \
+  -V 'Ubuntu 24.04 LTS AUTO (EFIBIOS)' \
   -o ../$HOSTNAME.iso \
   --grub2-mbr ../BOOT/1-Boot-NoEmul.img \
   -partition_offset 16 \
